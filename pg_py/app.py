@@ -7,7 +7,7 @@ Database.initialise()
 
 
 
-my_user = User('seubs101780@yahoo.com', 'Jonny', 'Jonnington The 3rd', None)
+my_user = User('seubs101780@yahoo.com', 'Jonny', 'Jonnington The 3rd', 1)
 
 my_user.save_to_db()
 

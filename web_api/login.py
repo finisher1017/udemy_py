@@ -2,6 +2,10 @@ import constants
 import oauth2
 import urllib.parse as urlparse
 import json
+from user import User
+from database import Database
+
+Database.initialise()
 
 # Create a consumer, which uses CONSUMER_KEY and CONSUMER_SECRET to identify our app uniquely
 consumer = oauth2.Consumer(constants.CONSUMER_KEY, constants.CONSUMER_SECRET)
@@ -38,6 +42,13 @@ access_token = dict(urlparse.parse_qsl(content.decode('utf-8')))
 
 print(access_token)
 
+email = input("Enter your email: ")
+first_name = input("Enter your first name: ")
+last_name = input("Enter your last name: ")
+    
+my_user = User(email, first_name, last_name, access_token['oauth_token'], access_token['oauth_token_secret'], None)
+my_user.save_to_db()
+
 # Create an 'authorized_token' Token object and use that to perform Twitter API calls on behalf of the user
 authorized_token = oauth2.Token(access_token['oauth_token'], access_token['oauth_token_secret'])
 authorized_client = oauth2.Client(consumer, authorized_token)
@@ -47,9 +58,8 @@ response, content = authorized_client.request('https://api.twitter.com/1.1/searc
 if response.status != 200:
     print("An error occured when searching!")
 
-print(content.decode('utf-8'))
-
 tweets = json.loads(content.decode('utf-8'))
 
 for tweet in tweets['statuses']:
     print(tweet['text'])
+
