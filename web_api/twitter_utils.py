@@ -4,7 +4,7 @@ import urllib.parse as urlparse
 
 consumer = oauth2.Consumer(constants.CONSUMER_KEY, constants.CONSUMER_SECRET)
 
-def get_request_token(self):
+def get_request_token():
         # Create a consumer, which uses CONSUMER_KEY and CONSUMER_SECRET to identify our app uniquely
         client = oauth2.Client(consumer)
         
