@@ -13,7 +13,7 @@ if not user:
     
     oauth_verifier = get_oauth_verifier(request_token)
     
-    access_token = get_oauth_verifier(request_token)
+    access_token = get_access_token(request_token, oauth_verifier)
     
     first_name = input("Enter your first name: ")
     last_name = input("Enter your last name: ")
